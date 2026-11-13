@@ -32,6 +32,6 @@ There is no software to install or run from this repository. The historical Unit
 
 The credits above follow the archived project page. No license for unrecovered source code is implied by this README. Original authors can open an issue to contribute updates or request corrections or removal of their material.
 
-On 2026-11-13, Hadar Reuveny agreed to Aaron Wetzler keeping the archival project page and repository with Hadar's name credited, and to Aaron Wetzler trying to get the old code running with any updates clearly labeled. This records Hadar Reuveny's response only; no software license is added. The reply supplied no files or links. Restoring the code would be future work; no Unity source has been recovered here.
+On 2026-11-13, Hadar Reuveny agreed to Aaron Wetzler keeping the archival project page and repository with Hadar's name credited, and to Aaron Wetzler trying to get the old code running with any updates clearly labeled. On the same date, Amit Bekerman agreed to keeping the project page with Amit's name credited. These notes record the scope each author stated; no software license is added. Neither reply supplied files or links. Restoring the code would be future work; no Unity source has been recovered here.
 
 Figure provenance: `assets/project-preview.jpg` is the original student-project game screenshot from the archived project page on Aaron Wetzler's website, copied without modification.
