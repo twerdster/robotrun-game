@@ -19,7 +19,8 @@ For installed Chrome, set PLAYWRIGHT_CHANNEL=chrome. Commands are generic;
 do not publish private host paths, camera IDs or machine-specific setup history.
 
 Use only local deployed model/WASM URLs. Preserve model integrity verification
-and dependency pins/notices. Keep CSP `connect-src 'self'` so the SDK's external
+and dependency pins/notices. Include the new-code LICENSE and third-party
+license texts/notices in each static build. Keep CSP `connect-src 'self'` so the SDK's external
 metrics reporter cannot connect; verify this policy when changing SDK versions.
 Start webcam capture only after an explicit click;
 no microphone, recording or frame upload. Retain keyboard/touch fallback,

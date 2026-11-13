@@ -33,7 +33,8 @@ Use Node.js 22.12 or newer and npm from `updated/browser/`: `npm ci`,
 `npm run dev`, `npm test`, `npm run build`, `npm run test:browser`.
 Development/preview binds loopback by default. Hosted camera access needs
 HTTPS; localhost also works. The setup script verifies the pinned model SHA
-and copies WebAssembly from locked dependencies. `dist/` is generated and not
+and copies WebAssembly from locked dependencies, the new-code license and
+third-party notices into the deployed files. `dist/` is generated and not
 committed. GitHub Actions builds, tests and publishes that directory to Pages.
 
 The production build, 27 Node regressions and 26 portable Chromium browser

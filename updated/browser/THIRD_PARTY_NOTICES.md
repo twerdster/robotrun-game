@@ -1,5 +1,9 @@
 # Third-party components
 
+New browser game code is covered by the separate [MIT license](LICENSE), also
+included in the deployed static files. The following components retain their
+own terms.
+
 - `three` 0.187.0: Copyright the Three.js authors, MIT. See
   [THREE-MIT.txt](licenses/THREE-MIT.txt).
 - `@mediapipe/tasks-vision` 1.2.3: Copyright the MediaPipe authors, Apache 2.0.

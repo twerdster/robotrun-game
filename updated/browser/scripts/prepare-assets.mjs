@@ -30,4 +30,5 @@ for (const filename of ['MEDIAPIPE-APACHE-2.0.txt','THREE-MIT.txt']) {
   await copyFile(path.join(root, 'licenses', filename), path.join(root, 'public/licenses', filename));
 }
 await copyFile(path.join(root, 'THIRD_PARTY_NOTICES.md'), path.join(root, 'public/THIRD_PARTY_NOTICES.md'));
+await copyFile(path.join(root, 'LICENSE'), path.join(root, 'public/LICENSE'));
 console.log('Prepared local MediaPipe runtime and verified Hand Landmarker model.');
