@@ -1,37 +1,47 @@
-# RobotRun game
+# RobotRun
 
-<p align="center">
-  <img src="assets/project-preview.jpg" alt="Third-person game view of a humanoid robot running along a fenced path toward a fire obstacle, with a score counter" width="440">
-</p>
+[Play in the browser](https://twerdster.github.io/robotrun-game/)
 
-![Platform: Unity3D + Intel Creative 3D camera](https://img.shields.io/badge/platform-Unity3D%20%2B%20Intel%20Creative%203D%20camera-lightgrey)
-![Source: not recovered](https://img.shields.io/badge/source-not%20recovered-lightgrey)
-![Archive: historical student project](https://img.shields.io/badge/archive-historical%20student%20project-informational)
+![Updated browser game screenshot](updated/browser/docs/browser-preview.png)
 
-A documentation record of a Unity3D game controlled with an Intel Creative 3D camera.
+*Actual output from the updated browser implementation. The historical screenshot remains in the original record.*
 
-Students: Hadar Reuveny, Amit Bekerman.
+![Language: TypeScript](https://img.shields.io/badge/language-TypeScript-3178c6)
+![Hand tracking: MediaPipe](https://img.shields.io/badge/hand%20tracking-MediaPipe-0097a7)
+![Platform: browser](https://img.shields.io/badge/platform-browser-777777)
 
-Supervision: Aaron Wetzler.
+A three-lane robot running game controlled by webcam hand tracking, keyboard
+or touch. Collect coins, jump barriers and avoid obstacles on a 1,000-metre
+course. Fire reverses the controls for ten seconds.
 
-## Available materials
+This is a **new browser implementation** under [`updated/browser/`](updated/browser/).
+The original Unity source remains unrecovered. The [original project record](original/README.md)
+preserves the historical screenshot, documented design, credits and permission
+scope; the new code is not presented as the students' original implementation.
 
-The historical project was a Unity3D running game controlled by hand position from a device named in the archived description as an Intel Creative 3D camera. The project description also identifies procedurally generated scenery and obstacles.
+Original project: **Hadar Reuveny and Amit Bekerman**, supervised by **Aaron Wetzler**.
+New browser implementation: Aaron Wetzler, with coding-agent assistance.
 
-This repository preserves that description, the student credits and an archived game screenshot. No Unity project, scripts, game assets, executable, camera integration or build configuration has been recovered for publication here. The screenshot is from the historical game; no playable build is included.
+## Run locally
 
-## Use and validation
+Requires Node.js 22.12 or newer and npm:
 
-There is no software to install or run from this repository. The historical Unity and camera SDK versions are not established by the available materials, and no build, hand-control test, gameplay run or performance measurement was performed for this archive. Use the website link below for the original project record.
+```sh
+cd updated/browser
+npm ci
+npm run dev
+```
 
-## Links
+Open the local URL printed by Vite. Choose **Enable camera**, allow webcam
+access and hold one hand at a comfortable height to calibrate. Move it left/right
+to steer, raise it to jump and lower it to duck. Keyboard/touch controls work
+without a camera. Camera use requires HTTPS or localhost; frames stay on device.
 
-- [Project entry on Aaron Wetzler's website](https://twerdster.github.io/#robotrun-game)
+`npm run build` checks TypeScript and produces a static `dist/` directory.
+`npm test` runs simulation/control regressions. See the
+[browser guide](updated/browser/README.md) for controls, hosting and dependencies,
+and the [validation record](updated/browser/docs/VALIDATION.md) for executed
+checks and limitations. Original Unity/Intel-camera behavior is unvalidated.
 
-## Attribution and reuse
-
-The credits above follow the archived project page. No license for unrecovered source code is implied by this README. Original authors can open an issue to contribute updates or request corrections or removal of their material.
-
-On 2026-11-13, Hadar Reuveny agreed to Aaron Wetzler keeping the archival project page and repository with Hadar's name credited, and to Aaron Wetzler trying to get the old code running with any updates clearly labeled. On the same date, Amit Bekerman agreed to keeping the project page with Amit's name credited. These notes record the scope each author stated; no software license is added. Neither reply supplied files or links. Restoring the code would be future work; no Unity source has been recovered here.
-
-Figure provenance: `assets/project-preview.jpg` is the original student-project game screenshot from the archived project page on Aaron Wetzler's website, copied without modification.
+New game code is [MIT](updated/browser/LICENSE); third-party components and
+historical materials retain their [separate terms](updated/browser/THIRD_PARTY_NOTICES.md).

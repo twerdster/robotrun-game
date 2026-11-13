@@ -1,0 +1,7 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+public/mediapipe/
+public/licenses/
+public/THIRD_PARTY_NOTICES.md

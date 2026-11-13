@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+    <meta name="theme-color" content="#141526">
+    <meta name="description" content="A browser reimplementation of RobotRun. Steer a robot through generated obstacles with webcam hand tracking, keyboard or touch controls.">
+    <title>RobotRun · Browser edition</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="masthead">
+        <a class="wordmark" href="./" aria-label="RobotRun home"><span class="robot-mark" aria-hidden="true">R<span>▰</span></span>ROBOT<span>RUN</span></a>
+        <div class="edition">BROWSER EDITION <span>Updated implementation</span></div>
+        <a class="source-link" href="https://github.com/twerdster/robotrun-game">Project &amp; source <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <main>
+        <div class="game-shell">
+          <div id="scene" tabindex="0" aria-label="RobotRun game. Arrow keys to steer, Space to jump, Down to duck, P to pause."></div>
+          <div class="hud" aria-label="Run statistics">
+            <div class="hud-stat"><span>DISTANCE</span><strong id="distance">0<span>m</span></strong></div>
+            <div class="hud-stat"><span>SCORE</span><strong id="score">0000</strong></div>
+            <div class="hud-stat coin-stat"><span>COINS</span><strong id="coins">0</strong></div>
+            <button id="pause" class="icon-button" aria-label="Pause game" title="Pause (P)" disabled>Ⅱ</button>
+          </div>
+
+          <div id="overlay" class="game-overlay">
+            <div class="overlay-content">
+              <span id="eyebrow" class="eyebrow">READY TO RUN</span>
+              <h1 id="overlay-title">Make it to<br>1,000 metres.</h1>
+              <p id="overlay-description">Find a clear lane. Jump barriers and duck under beams.<br>Watch for fire: it reverses your controls for 10 seconds.</p>
+              <button id="play" class="primary-button">Start running <span aria-hidden="true">→</span></button>
+              <p id="start-hint" class="start-hint">Use the keyboard, touch controls, or enable your camera below.</p>
+            </div>
+          </div>
+
+          <div id="run-message" class="run-message" role="status" aria-live="polite"></div>
+          <div class="course-tag" aria-hidden="true"><span class="status-dot"></span>1,000 m ROUTE <span>01 / DUSK</span></div>
+          <div class="touch-controls" aria-label="Touch game controls">
+            <button data-action="left" aria-label="Move left">←</button>
+            <button data-action="right" aria-label="Move right">→</button>
+            <button data-action="jump" aria-label="Jump">↑ <span>JUMP</span></button>
+            <button data-action="duck" aria-label="Duck">↓ <span>DUCK</span></button>
+          </div>
+        </div>
+
+        <section class="controls-panel" aria-labelledby="controls-title">
+          <div class="control-copy">
+            <div class="panel-heading"><span class="eyebrow">GAME CONTROLS</span><h2 id="controls-title">Choose how you run</h2></div>
+            <div class="mode-picker" role="group" aria-label="Control mode">
+              <button id="keyboard-mode" class="mode-button selected" aria-pressed="true">Keyboard &amp; touch</button>
+              <button id="camera-mode" class="mode-button" aria-pressed="false">Hand tracking</button>
+            </div>
+            <div id="keyboard-help" class="control-help">
+              <div><kbd>←</kbd><kbd>→</kbd><span>Change lane</span></div>
+              <div><kbd>Space</kbd><span>Jump barriers</span></div>
+              <div><kbd>↓</kbd><span>Duck under beams</span></div>
+              <div><kbd>P</kbd><span>Pause / resume</span></div>
+            </div>
+            <div id="camera-help" class="control-help hand-help" hidden>
+              <p>Hold one open hand at a comfortable height to calibrate. Move left or right to steer. Raise your hand to jump; lower it to duck.</p>
+              <p class="muted">Camera frames are processed on your device. No video is uploaded. Tracking pauses the run when your hand is lost.</p>
+            </div>
+          </div>
+          <div class="camera-panel">
+            <div class="camera-preview" id="camera-preview">
+              <video id="webcam" autoplay playsinline muted aria-label="Mirrored camera preview"></video>
+              <canvas id="hand-overlay" aria-hidden="true"></canvas>
+              <div id="camera-placeholder" class="camera-placeholder"><span aria-hidden="true">✋</span><p>Your hand is the controller</p><small>Camera is off</small></div>
+              <div class="camera-state"><span id="camera-dot" class="status-dot"></span><span id="camera-status" role="status" aria-live="polite">Camera off</span></div>
+            </div>
+            <div class="camera-actions">
+              <button id="camera-toggle" class="secondary-button">Enable camera</button>
+              <button id="calibrate" class="text-button" disabled>Recalibrate</button>
+            </div>
+            <p id="camera-error" class="camera-error" role="alert" hidden></p>
+          </div>
+        </section>
+      </main>
+
+      <footer><p>Original RobotRun project: Hadar Reuveny &amp; Amit Bekerman · Supervised by Aaron Wetzler</p><p>This browser implementation is updated work. <a href="https://github.com/twerdster/robotrun-game/tree/main/original">Original project record</a></p></footer>
+    </div>
+    <noscript><p class="noscript">RobotRun requires JavaScript and WebGL. <a href="https://github.com/twerdster/robotrun-game">Read the project documentation</a>.</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
