@@ -12,6 +12,12 @@ remain unrecovered; do not describe new code as a compilation or port of them.
 artwork and MediaPipe webcam input. Original reports/slides recovered privately
 contain personal student identifiers and are not redistributed here.
 
+The root README preserves the complete pre-browser project record from commit
+`d8b602d`, including its opening screenshot, badges, credits and attribution.
+The new browser description, screenshot and play/source/guide links appear only
+in the appended `Updated` section. That section clarifies that the preceding
+availability and validation statements describe the historical Unity application.
+
 ## Current implementation
 
 Three lanes, coins worth ten points each, jumping, a 1,000-metre finish and

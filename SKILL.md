@@ -5,8 +5,14 @@ relevant browser code/guides. New commits use Aaron Wetzler with
 409920+twerdster@users.noreply.github.com. Preserve original student credits,
 historical authors, the screenshot and third-party terms.
 
-Keep the short root README focused on playing and basic local setup. Explain
-implementation details, controls, limitations and test scope in linked guides.
+Preserve the historical root README first, including its original screenshot,
+badges, description, student credits and attribution. Add the browser game only
+under the appended `Updated` section; do not replace the historical overview
+with the new implementation. The preserved pre-browser README is at `d8b602d`.
+Keep the new section concise, with play/source/setup/validation links and its
+own clearly labeled screenshot. Clarify there that the preceding availability
+statements concern the original Unity application. Explain implementation
+details, controls, limitations and test scope in linked browser guides.
 The browser version is newly written updated work: no Unity project/source
 was recovered, so never call it a compiled original, source-level port or
 historically equivalent build. Keep original material under its own section.
