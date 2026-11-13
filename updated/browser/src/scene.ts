@@ -30,6 +30,9 @@ export class RunnerScene {
   private readonly red: THREE.MeshStandardMaterial;
   private readonly coinMaterial: THREE.MeshStandardMaterial;
   private disposed = false;
+  private dirty = true;
+  private staticSignature: string | null = null;
+  private readonly invalidate = (): void => { this.dirty = true; };
 
   constructor(private readonly container: HTMLElement) {
     // Let the app present an accessible fallback if WebGL is unavailable.
@@ -42,6 +45,7 @@ export class RunnerScene {
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.domElement.setAttribute('aria-label', 'Robot running along a three-lane obstacle course');
     this.renderer.domElement.setAttribute('role', 'img');
+    this.renderer.domElement.addEventListener('webglcontextrestored', this.invalidate);
     this.container.appendChild(this.renderer.domElement);
     this.scene.background = new THREE.Color('#242035');
     this.scene.fog = new THREE.Fog('#292338', 35, 142);
@@ -231,6 +235,21 @@ export class RunnerScene {
 
   render(state: GameState, elapsedSeconds: number): void {
     if (this.disposed) return;
+    if (state.phase !== 'running') {
+      // Freeze decorative animation while idle; avoid repeatedly submitting an
+      // unchanged scene, particularly when software WebGL shares the CPU.
+      const signature = JSON.stringify([
+        state.phase, state.lane, state.targetLane, state.jumpY, state.ducking,
+        state.distance, state.burningRemaining,
+        state.obstacles.map(value => [value.id, value.type, value.lane, value.z]),
+        state.pickups.map(value => [value.id, value.lane, value.z, value.collected]),
+      ]);
+      if (!this.dirty && signature === this.staticSignature) return;
+      this.staticSignature = signature;
+    } else {
+      this.staticSignature = null;
+    }
+    this.dirty = false;
     this.robot.position.set(state.lane * LANE_WIDTH, state.jumpY, 0);
     this.robot.scale.y = state.ducking ? 0.52 : 1;
     this.robot.rotation.z = (state.lane - state.targetLane) * 0.1;
@@ -304,6 +323,7 @@ export class RunnerScene {
     this.camera.fov = width / height < 0.8 ? 66 : 52;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
+    this.invalidate();
   }
 
   dispose(): void {
@@ -314,6 +334,7 @@ export class RunnerScene {
     this.obstacleMeshes.clear();
     this.pickupMeshes.clear();
     this.scene.clear();
+    this.renderer.domElement.removeEventListener('webglcontextrestored', this.invalidate);
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

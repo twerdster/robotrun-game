@@ -4,7 +4,9 @@ export default defineConfig({
   testDir: './tests',
   testMatch: 'browser.spec.ts',
   fullyParallel: true,
-  workers: 2,
+  // Software WebGL and MediaPipe share the CI runner's CPU. Running graphics
+  // contexts sequentially avoids starving unrelated input/inference checks.
+  workers: process.env.CI ? 1 : 2,
   timeout: 30_000,
   expect: { timeout: 8_000 },
   forbidOnly: Boolean(process.env.CI),
@@ -25,8 +27,8 @@ export default defineConfig({
     },
   },
   projects: [
-    { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
-    { name: 'mobile-chromium', use: { ...devices['Pixel 7'] } },
+    { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 } },
+    { name: 'mobile-chromium', use: { ...devices['Pixel 7'], deviceScaleFactor: 1 } },
   ],
   // Run npm run build first: these checks exercise the compiled production files.
   webServer: {

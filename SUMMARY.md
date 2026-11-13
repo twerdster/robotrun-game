@@ -19,6 +19,8 @@ ten-second fire control reversal implement documented project ideas. Ducking
 and overhead beams, the chosen course length, generated layouts, physics and
 graphics are new design choices. Every generated row leaves a clear lane.
 Seeded simulation runs at fixed 120-Hz steps, independently of rendering.
+Unchanged ready, paused and finished scenes are drawn once rather than on every
+animation frame; resizing or restoring the WebGL context invalidates that cache.
 
 Webcam input uses Google's Hand Landmarker through @mediapipe/tasks-vision,
 one hand, neutral-height calibration, smoothed/debounced mirrored controls and

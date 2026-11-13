@@ -19,7 +19,8 @@ phone emulation and a physical live camera/device are separate kinds of evidence
   30 seeded courses by following an available lane; this is not a human-play or
   recognition-accuracy study.
 - The portable Playwright suite passes 26 checks: 13 scenarios repeated in
-  desktop and phone-emulated Chromium. It covers keyboard/pointer input,
+  desktop and phone-emulated Chromium at pixel ratio one. CI runs one worker
+  because software graphics and inference share the runner's CPU. It covers keyboard/pointer input,
   short jump taps, ignored inputs during pause, mode-switch lane continuity,
   reset without a tracked hand, blur, viewport widths 320/390/768/1440, denied
   camera access, model HTTP 404, late-start cancellation, repeated camera start/stop,

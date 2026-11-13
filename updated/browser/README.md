@@ -71,6 +71,8 @@ physical-device coverage is limited to the [validation record](docs/VALIDATION.m
 `src/game.ts` is a seeded, fixed-step simulation; `src/scene.ts` renders state
 using new procedural meshes; `src/tracking.ts` calibrates and filters hand
 controls and owns camera/model lifetime; `src/main.ts` connects the interface.
+Unchanged ready, paused and finished scenes are not redrawn continuously;
+running scenes continue to animate.
 The 1,000-metre length, generated layouts, collision volumes, movement constants,
 ducking and overhead beams are new design choices. Coin scoring, lane selection,
 jump and temporary fire reversal follow the recovered project description.
