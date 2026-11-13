@@ -18,7 +18,7 @@ phone emulation and a physical live camera/device are separate kinds of evidence
   filtering, hand loss and timestamp/error cases. One generation test completes
   30 seeded courses by following an available lane; this is not a human-play or
   recognition-accuracy study.
-- The portable Playwright suite passes 26 checks: 13 scenarios repeated in
+- The portable Playwright suite passes 28 checks: 14 scenarios repeated in
   desktop and phone-emulated Chromium at pixel ratio one. CI runs one worker
   because software graphics and inference share the runner's CPU. It covers keyboard/pointer input,
   short jump taps, ignored inputs during pause, mode-switch lane continuity,
@@ -26,7 +26,10 @@ phone emulation and a physical live camera/device are separate kinds of evidence
   camera access, model HTTP 404, late-start cancellation, repeated camera start/stop,
   real no-hand inference, stalled-video recovery, WebGL fallback and the connection
   policy. Browser API failures and a 404 are intentionally induced for error-path
-  tests; MediaPipe inference results are not substituted.
+  tests; MediaPipe inference results are not substituted. One scenario holds
+  each wrapped real SDK call for at least 180 ms and checks the
+  50-ms gap after completion and camera-button response. That injected delay
+  isolates scheduling behavior; it is not a device-performance benchmark.
 - A separate Chrome 157 run uses a prerecorded fake-webcam stream derived from
   Google's `right_hands.jpg` test image, translated within a 640×480 frame to
   exercise neutral, left, right, raised, lowered and absent-hand inputs. The real
@@ -45,7 +48,7 @@ phone emulation and a physical live camera/device are separate kinds of evidence
   `connect-src 'self'` policy. The actual SDK endpoint produced a policy-violation
   event with no outgoing request/response in the recorded browser check.
   Camera frames stay in the browser. No runtime CDN assets were requested.
-- Two actual Claude review passes examined the implementation and documentation.
+- Actual Claude reviews examined the implementation and documentation.
   Findings led to corrections in input edges, pause/reset behavior, camera-mode
   switching and project-path hosting. Static review does not expand the runtime
   coverage listed above.

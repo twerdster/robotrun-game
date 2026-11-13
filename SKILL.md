@@ -27,6 +27,8 @@ Start webcam capture only after an explicit click;
 no microphone, recording or frame upload. Retain keyboard/touch fallback,
 camera-error handling, stop/cancellation cleanup, calibration, hand-loss pause
 and explicit resume. Keep simulation deterministic and rendering read-only.
+Keep at least 50 ms between an inference call's completion and the next call;
+start-time throttling lets slow synchronous inference monopolize the UI loop.
 Preserve the idle render cache and its resize/context-restoration invalidation;
 running frames still redraw normally. Browser CI uses one worker and pixel ratio
 one to avoid competing software graphics contexts; phone emulation checks CSS

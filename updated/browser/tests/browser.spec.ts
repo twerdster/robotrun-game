@@ -217,6 +217,45 @@ test('the local model performs real no-hand inference and the camera can restart
   expect(trackingAssets.every(url => new URL(url).pathname.startsWith('/robotrun-game/'))).toBe(true);
 });
 
+test('slow real inference leaves a browser input interval between calls', async ({ page }) => {
+  await openGame(page);
+  await page.getByRole('button', { name: 'Enable camera', exact: true }).click();
+  await expect(page.locator('#camera-status')).toHaveAttribute('data-status', 'nohand', { timeout: 20_000 });
+  await page.evaluate(async () => {
+    const bundle = performance.getEntriesByType('resource')
+      .map(entry => entry.name).find(name => /\/vision_bundle-[^/]+\.js$/.test(name));
+    if (!bundle) throw new Error('Loaded MediaPipe bundle was not found.');
+    const { HandLandmarker } = await import(/* @vite-ignore */ bundle);
+    const original = HandLandmarker.prototype.detectForVideo;
+    const samples: { start: number; end: number }[] = [];
+    (window as unknown as { slowInferenceSamples: typeof samples }).slowInferenceSamples = samples;
+    HandLandmarker.prototype.detectForVideo = function (...args: unknown[]) {
+      const start = performance.now();
+      const result = Reflect.apply(original, this, args);
+      // Artificial processing cost reproduces a slow device without replacing
+      // the real model's results or changing its decoded camera input.
+      while (performance.now() - start < 180) { /* controlled test-only delay */ }
+      samples.push({ start, end: performance.now() });
+      return result;
+    };
+  });
+  await expect.poll(() => page.evaluate(() =>
+    (window as unknown as { slowInferenceSamples: unknown[] }).slowInferenceSamples.length,
+  )).toBeGreaterThanOrEqual(6);
+  const samples = await page.evaluate(() =>
+    (window as unknown as { slowInferenceSamples: { start: number; end: number }[] }).slowInferenceSamples,
+  );
+  for (let index = 1; index < samples.length; index += 1) {
+    // Half a millisecond accommodates browser clock precision at the boundary.
+    expect(samples[index].start - samples[index - 1].end).toBeGreaterThanOrEqual(49.5);
+  }
+  await page.locator('#play').click();
+  await expect(page.locator('#scene')).toHaveAttribute('data-phase', 'ready');
+  await page.getByRole('button', { name: 'Stop camera', exact: true }).click();
+  await expect(page.locator('#camera-status')).toHaveAttribute('data-status', 'idle');
+  await expect(page.locator('#camera-error')).toBeHidden();
+});
+
 test('restart without a tracked hand restores the ready screen after pause or game over', async ({ page }) => {
   test.setTimeout(45_000);
   await openGame(page);

@@ -62,7 +62,9 @@ model-loading failure leave keyboard/touch play available.
 
 The model loop processes new camera frames at most 20 times per second.
 `detectForVideo` is synchronous and shares the main thread with rendering;
-performance depends on the device. GPU initialization falls back to the CPU
+the loop leaves at least 50 ms after a call before starting another. Individual
+calls can still block the interface, and performance depends on the device.
+GPU initialization falls back to the CPU
 delegate when needed. A hidden tab pauses the run and inference. Browser and
 physical-device coverage is limited to the [validation record](docs/VALIDATION.md).
 

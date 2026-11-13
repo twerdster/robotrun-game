@@ -195,7 +195,7 @@ export class HandTracking {
   private enabled = true;
   private starting: Promise<void> | null = null;
   private abort: AbortController | null = null;
-  private lastDetection = -Infinity;
+  private nextDetectionAt = 0;
   private lastVideoTime = -1;
   private lastFreshFrameAt = 0;
   private stalled = false;
@@ -226,7 +226,7 @@ export class HandTracking {
     this.running = true;
     this.enabled = true;
     this.mapper.recalibrate();
-    this.lastDetection = -Infinity;
+    this.nextDetectionAt = 0;
     this.lastVideoTime = -1;
     this.abort = new AbortController();
     this.report('loading', 'Opening camera and loading the local hand-tracking model…');
@@ -369,7 +369,7 @@ export class HandTracking {
     if (!this.running || !this.model) return;
     this.request = requestAnimationFrame(this.frame);
     if (!this.enabled || document.hidden) return;
-    if (now - this.lastDetection < 50) return;
+    if (now < this.nextDetectionAt) return;
     if (this.video.readyState < 2 || this.video.currentTime === this.lastVideoTime) {
       if (!this.stalled && now - this.lastFreshFrameAt >= 500) {
         this.stalled = true;
@@ -382,7 +382,6 @@ export class HandTracking {
       }
       return;
     }
-    this.lastDetection = now;
     this.lastVideoTime = this.video.currentTime;
     this.lastFreshFrameAt = now;
     this.stalled = false;
@@ -398,6 +397,10 @@ export class HandTracking {
       else if (landmarks) this.report('tracking', `Hand tracking ready (${this.delegate}). Move sideways to steer; raise your hand to jump, lower it to duck.`);
     } catch (error) {
       this.fail(`Hand tracking stopped: ${cameraErrorMessage(error)}`);
+    } finally {
+      // Slow synchronous inference must still leave time for browser input and
+      // rendering. A start-to-start limit can otherwise consume every RAF.
+      this.nextDetectionAt = performance.now() + 50;
     }
   };
 

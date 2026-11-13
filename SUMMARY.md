@@ -24,7 +24,9 @@ animation frame; resizing or restoring the WebGL context invalidates that cache.
 
 Webcam input uses Google's Hand Landmarker through @mediapipe/tasks-vision,
 one hand, neutral-height calibration, smoothed/debounced mirrored controls and
-a half-second hand-loss timeout. Missing hands pause gameplay; reacquisition
+a half-second hand-loss timeout. Inference calls leave a minimum 50-ms gap after
+completion, rather than immediately repeating a slow synchronous call.
+Missing hands pause gameplay; reacquisition
 requires explicit resume. Keyboard and touch controls work without a camera.
 The camera starts only by request; stopping it closes tracks and the model.
 Model and WebAssembly are served locally; camera frames are not uploaded.
@@ -39,7 +41,7 @@ and copies WebAssembly from locked dependencies, the new-code license and
 third-party notices into the deployed files. `dist/` is generated and not
 committed. GitHub Actions builds, tests and publishes that directory to Pages.
 
-The production build, 27 Node regressions and 26 portable Chromium browser
+The production build, 27 Node regressions and 28 portable Chromium browser
 checks pass. Separate recorded-hand inference and lifecycle checks are described
 in `updated/browser/docs/VALIDATION.md`; do not infer a physical live-hand,
 physical-phone or cross-browser result from those fixtures/emulation checks.
