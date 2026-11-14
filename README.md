@@ -1,5 +1,9 @@
 # RobotRun game
 
+[![New!](updated/assets/new-badge.svg)](updated/README.md#updated-and-ported-for-modern-hardware) [Updated and ported for modern hardware](updated/README.md#updated-and-ported-for-modern-hardware)
+
+*Historical project reference follows. Current builds and results are in the updated section above.*
+
 <p align="center">
   <img src="assets/project-preview.jpg" alt="Third-person game view of a humanoid robot running along a fenced path toward a fire obstacle, with a score counter" width="440">
 </p>

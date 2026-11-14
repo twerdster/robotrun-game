@@ -1,5 +1,11 @@
 # RobotRun maintenance state
 
+## Updated-work navigation (2026-11-14)
+
+Aaron authorized a top-of-page local `New!` badge and “Updated and ported for modern hardware” link in the root README. Both lead to the matching heading in `updated/README.md`, the new concise entrypoint for the browser implementation, playable game, setup and recorded validation. Its summary explicitly identifies this as newly written work rather than a recovered Unity source port. An italic line identifies the following root content as the historical project reference.
+
+The historical root body, including the previously appended `Updated` section, remains unchanged after removing only the new navigation block. Earlier byte-identity statements refer to their recorded baseline. This documentation-only change leaves all browser code, historical material, assets, dependency pins and validation records unchanged; it adds no runtime evidence.
+
 Read this file, SKILL.md and README.md before changes. The repository preserves
 the Technion project record and a separately written browser implementation.
 Original students: Hadar Reuveny and Amit Bekerman. Supervisor and maintainer:

@@ -1,5 +1,11 @@
 # Maintain RobotRun
 
+## Updated-work navigation
+
+Aaron explicitly authorized a top-of-page local `New!` badge and exact “Updated and ported for modern hardware” link in the root README on 2026-11-14. Keep both linked to `updated/README.md#updated-and-ported-for-modern-hardware`. Retain the italic historical-reference qualifier. Preserve the rest of the root body, including its existing appended `Updated` section; earlier root-preservation instructions below permit this authorized navigation addition.
+
+Keep the new entrypoint brief and factual, linking the playable game and the existing browser guides. State that the browser code is separately written: no historical Unity/C# source or Intel camera integration was recovered. Check current root preservation after removing only the navigation block, and keep old validation hashes attached to their recorded snapshots. These navigation files are not bundled into the browser package; no runtime or rebuild claim follows from documentation-only edits.
+
 Read SUMMARY.md first, then this file, README.md, the original record and the
 relevant browser code/guides. New commits use Aaron Wetzler with
 409920+twerdster@users.noreply.github.com. Preserve original student credits,
