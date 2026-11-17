@@ -1,64 +1,23 @@
-# RobotRun game
+# RobotRun
 
-[![New!](updated/assets/new-badge.svg)](updated/README.md#updated-and-ported-for-modern-hardware) [Updated and ported for modern hardware](updated/README.md#updated-and-ported-for-modern-hardware)
+RobotRun was a Unity running game controlled by hand position from a device the archived description calls an Intel Creative 3D camera. The historical description includes generated scenery, obstacles and a robot runner.
 
-*Historical project reference follows. Current builds and results are in the updated section above.*
+Original project: **Hadar Reuveny and Amit Bekerman**. Supervision: **Aaron Wetzler**.
 
-<p align="center">
-  <img src="assets/project-preview.jpg" alt="Third-person game view of a humanoid robot running along a fenced path toward a fire obstacle, with a score counter" width="440">
-</p>
+<img src="assets/project-preview.jpg" alt="Unchanged screenshot from the historical Unity game." width="600">
 
-![Platform: Unity3D + Intel Creative 3D camera](https://img.shields.io/badge/platform-Unity3D%20%2B%20Intel%20Creative%203D%20camera-lightgrey)
-![Source: not recovered](https://img.shields.io/badge/source-not%20recovered-lightgrey)
-![Archive: historical student project](https://img.shields.io/badge/archive-historical%20student%20project-informational)
+*Unchanged screenshot from the historical Unity game.*
 
-A documentation record of a Unity3D game controlled with an Intel Creative 3D camera.
-
-Students: Hadar Reuveny, Amit Bekerman.
-
-Supervision: Aaron Wetzler.
-
-## Available materials
-
-The historical project was a Unity3D running game controlled by hand position from a device named in the archived description as an Intel Creative 3D camera. The project description also identifies procedurally generated scenery and obstacles.
-
-This repository preserves that description, the student credits and an archived game screenshot. No Unity project, scripts, game assets, executable, camera integration or build configuration has been recovered for publication here. The screenshot is from the historical game; no playable build is included.
-
-## Use and validation
-
-There is no software to install or run from this repository. The historical Unity and camera SDK versions are not established by the available materials, and no build, hand-control test, gameplay run or performance measurement was performed for this archive. Use the website link below for the original project record.
-
-## Links
-
-- [Project entry on Aaron Wetzler's website](https://twerdster.github.io/#robotrun-game)
-
-## Attribution and reuse
-
-The credits above follow the archived project page. No license for unrecovered source code is implied by this README. Original authors can open an issue to contribute updates or request corrections or removal of their material.
-
-On 2026-11-13, Hadar Reuveny agreed to Aaron Wetzler keeping the archival project page and repository with Hadar's name credited, and to Aaron Wetzler trying to get the old code running with any updates clearly labeled. On the same date, Amit Bekerman agreed to keeping the project page with Amit's name credited. These notes record the scope each author stated; no software license is added. Neither reply supplied files or links. Restoring the code would be future work; no Unity source has been recovered here.
-
-Figure provenance: `assets/project-preview.jpg` is the original student-project game screenshot from the archived project page on Aaron Wetzler's website, copied without modification.
+The original Unity/C# project and camera integration remain missing. The [preserved original README](original/README.md) retains the project record and attribution.
 
 ## Updated
 
-The sections above preserve the historical Unity project record; their source,
-build and validation statements concern that original application.
+**[Open the browser demo](https://twerdster.github.io/robotrun-game/)** · [Updated guide](updated/README.md)
 
-Added on 2026-11-13: a separately written browser game using TypeScript,
-Three.js and MediaPipe hand tracking, with keyboard and touch controls.
-The original Unity source remains unrecovered. New browser code: Aaron Wetzler,
-with coding-agent assistance.
+The new TypeScript/Three.js browser game provides three lanes, coins, jumping, ducking and fire that temporarily reverses controls. Keyboard and touch work without a camera; optional MediaPipe input uses locally served models. This is new code, not a port of the missing Unity source. Live hand play and physical phones remain untested.
 
-- [Play the browser game](https://twerdster.github.io/robotrun-game/)
-- [Updated browser source](updated/browser/)
-- [Setup and controls](updated/browser/README.md) — local builds require Node.js 22.12 or newer and npm.
-- [Validation and limitations](updated/browser/docs/VALIDATION.md)
+[Setup and controls (Node.js 22.12+)](updated/browser/README.md) · [Recorded checks and limitations](updated/browser/docs/VALIDATION.md) · [Original README](original/README.md)
 
-![Updated browser game screenshot](updated/browser/docs/browser-preview.png)
+## Project record and rights
 
-*Actual output from the new browser implementation, separate from the historical Unity screenshot above.*
-
-The [MIT license](updated/browser/LICENSE) applies to the new game code.
-Third-party components and historical materials retain their
-[separate terms](updated/browser/THIRD_PARTY_NOTICES.md).
+[Historical context, attribution and recovery details](PROJECT_RECORD.md) preserve the earlier record. Original material, datasets, dependencies and new code keep their separately stated terms; no blanket license is added.
